@@ -6,6 +6,12 @@ class KaraokeBar:
         self.till = till
         self.entry_fee = entry_fee
 
+    def fail_affordability_check(self, room, guest):
+        return guest.wallet < self.entry_fee
+
+    def fail_space_check(self, room, guest):
+        return room.capacity - len(room.guests) == 0
+
     def charge_guest_entry_fee(self, guest):
         guest.wallet -= self.entry_fee
         self.till += self.entry_fee
@@ -18,10 +24,11 @@ class KaraokeBar:
 
 # Checks whether guest can afford entry, and whether the room has space. If they can takes money and assigns them to the room
     def check_in_guest(self, room, guest):
-        if guest.wallet < self.entry_fee:
+
+        if self.fail_affordability_check(room, guest):
             return "Guest can't afford entry"
 
-        if room.capacity - len(room.guests) == 0:
+        if self.fail_space_check(room, guest):
             return "Room is full"
 
         self.charge_guest_entry_fee(guest)
