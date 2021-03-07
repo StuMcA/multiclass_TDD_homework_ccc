@@ -3,6 +3,7 @@ import unittest
 from classes.karaoke_bar import KaraokeBar
 from classes.room import Room
 from classes.guest import Guest
+from classes.song import Song
 
 class TestKaraokeBar(unittest.TestCase):
 
@@ -11,6 +12,7 @@ class TestKaraokeBar(unittest.TestCase):
         self.karaoke_bar = KaraokeBar("CodeClan Caraoke", rooms, 10000, 15)
         self.guest_1 = Guest("Bonnie Tyler", 500)
         self.guest_2 = Guest("Axl Rose", 5)
+        self.guest_3 = Guest("Meat Loaf", 25, Song("Raspberry Beret", "Prince"))
 
 
     def test_karaoke_bar_has_name(self):
@@ -61,6 +63,14 @@ class TestKaraokeBar(unittest.TestCase):
         self.karaoke_bar.check_in_guest(self.karaoke_bar.rooms[0], self.guest_1)
         self.assertEqual(15, len(self.karaoke_bar.rooms[0].guests))
 
+    def test_check_in__has_favourite_song(self):
+        self.karaoke_bar.rooms[0].add_song_to_playlist(Song("Raspberry Beret", "Prince"))
+        response = self.karaoke_bar.check_in_guest(self.karaoke_bar.rooms[0], self.guest_3)
+        self.assertEqual("Yaasss! Belter!", response)
+
+
+    
+    # def test_check_in__no_favourite_song(self):
 
     def test_add_guest_to_room(self):
         self.karaoke_bar.add_guest_to_room(self.karaoke_bar.rooms[0], self.guest_1)

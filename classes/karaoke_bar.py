@@ -26,4 +26,9 @@ class KaraokeBar:
 
         self.charge_guest_entry_fee(guest)
         self.add_guest_to_room(room, guest)
+
+        # Checks whether favourite song is in room playlist
+        for song in room.playlist:
+            if guest.favourite_song.name == song.name and guest.favourite_song.artist == song.artist:
+                return "Yaasss! Belter!"
         
