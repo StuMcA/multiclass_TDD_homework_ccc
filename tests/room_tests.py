@@ -6,7 +6,7 @@ from classes.song import Song
 class TestRoom(unittest.TestCase):
 
     def setUp(self):
-        self.room = Room("Haddaway's Hideaway")
+        self.room = Room("Haddaway's Hideaway", 15)
         self.song = Song("Friday I'm In Love", "The Cure")
 
 
@@ -22,3 +22,6 @@ class TestRoom(unittest.TestCase):
     def test_add_song_to_playlist(self):
         self.room.add_song_to_playlist(self.song)
         self.assertEqual(1, len(self.room.playlist))
+
+    def test_has_capacity(self):
+        self.assertEqual(15, self.room.capacity)
