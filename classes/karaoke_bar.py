@@ -22,6 +22,10 @@ class KaraokeBar:
     def check_out_guest(self, room, guest):
         room.guests.remove(guest)
 
+    def favourite_song_check(self, room, guest):
+        for song in room.playlist:
+            return (guest.favourite_song.name == song.name and guest.favourite_song.artist == song.artist) 
+
 # Checks whether guest can afford entry, and whether the room has space. If they can takes money and assigns them to the room
     def check_in_guest(self, room, guest):
 
@@ -34,8 +38,7 @@ class KaraokeBar:
         self.charge_guest_entry_fee(guest)
         self.add_guest_to_room(room, guest)
 
-        # Checks whether favourite song is in room playlist
-        for song in room.playlist:
-            if guest.favourite_song.name == song.name and guest.favourite_song.artist == song.artist:
-                return "Yaasss! Belter!"
+        # Checks whether favourite song is in room playlist, returns a string if so
+        if self.favourite_song_check(room, guest):
+            return "Yaasss! Belter!"
         

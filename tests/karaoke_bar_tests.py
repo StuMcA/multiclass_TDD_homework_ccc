@@ -12,7 +12,7 @@ class TestKaraokeBar(unittest.TestCase):
         self.karaoke_bar = KaraokeBar("CodeClan Caraoke", rooms, 10000, 15)
         self.guest_1 = Guest("Bonnie Tyler", 500)
         self.guest_2 = Guest("Axl Rose", 5)
-        self.guest_3 = Guest("Meat Loaf", 25, Song("Raspberry Beret", "Prince"))
+        self.guest_3 = Guest("Meat Loaf", 17, Song("Raspberry Beret", "Prince"))
 
 
     def test_karaoke_bar_has_name(self):
